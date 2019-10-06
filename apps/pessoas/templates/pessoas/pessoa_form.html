@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+{% block content %}
+    <h1>Pessoa</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+            <button type="submit" class="btn btn-outline-success btn-block">
+                Gravar
+            </button>
+        {% endbuttons %}
+    </form>
+
+    {% if object %}
+        <a href="{% url 'treinamentos:treinamento_create' pessoa_id=object.id %}"
+        class="btn btn-outline-primary btn-block">
+            Adicionar Treinamentos
+        </a>
+    {% endif %}
+
+
+{% endblock %}

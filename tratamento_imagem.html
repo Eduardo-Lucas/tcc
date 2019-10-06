@@ -1,0 +1,3 @@
+<a href="{{ produto.get_absolute_url }}">
+    <img src="{% if produto.image %}{{ produto.image.url }}{% else %} {% static 'img/no_image.png' %} {% endif %}" class="card-img-top" alt="...">
+</a>

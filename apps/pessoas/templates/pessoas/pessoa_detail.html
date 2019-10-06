@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <div class="row align-middle">
+            <div class="col-md-6 ">
+                <h5>Detalhe da Pessoa</h5>
+            </div>
+            <div class="col-md-6 ">
+                <a href="{% url 'pessoa_list' %}" class="btn btn-outline-primary">
+                    <i class="fas fa-arrow-alt-circle-left"></i>
+                    Voltar
+                </a>
+            </div>
+        </div>
+    </div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+                <img src="{% if object.imagem %}{{ object.imagem.url }}{% else %} {% static 'img/no_image_found.png' %} {% endif %}"
+                        class="card-img-top" alt="...">
+
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Id.: {{object.id}}</li>
+                    <li class="list-group-item">Nome: {{object.nome}}</li>
+                    <li class="list-group-item">Data de Nascimento: {{object.data_de_nascimento|date:"d/m/Y"}}</li>
+                    <li class="list-group-item">Sexo: {{object.get_sexo}}</li>
+                </ul>
+
+            </div>
+        </div>
+
+
+        {% if object.treinamento_set.all %}
+        <div class="col-md-6 border">
+            <h6 class="text-info">Treinamentos realizados por <strong>{{object.nome}}</strong></h6>
+            <div class="table-responsive-sm">
+                <table class="table table-sm table-striped table-hover table-bordered">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th>Nome do Treinamento</th>
+                      <th class="text-center">Imagem</th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                <div class="container">
+                {% for treino in object.treinamento_set.all %}
+                   <tr>
+                       <td class="align-middle">
+                          {{ treino.treinamento }}
+                       </td>
+                       <td class="align-middle text-center">
+                      <img src="{% if treino.imagem %}
+                                    {{ treino.imagem.url }}
+                              {% else %}
+                                    {% static 'img/no_image_found.png' %}
+                              {% endif %}"
+                         alt="Responsive image" class="img-thumbnail img-fluid"
+                            width="50" height="50">
+                       </td>
+                   </tr>
+                {% endfor %}
+                   </tbody>
+                    </table>
+                </div>
+                </div>
+        {% endif%}
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+
+<!--
+<div class="card" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Cras justo odio</li>
+    <li class="list-group-item">Dapibus ac facilisis in</li>
+    <li class="list-group-item">Vestibulum at eros</li>
+  </ul>
+  <div class="card-body">
+    <a href="#" class="card-link">Card link</a>
+    <a href="#" class="card-link">Another link</a>
+  </div>
+</div>

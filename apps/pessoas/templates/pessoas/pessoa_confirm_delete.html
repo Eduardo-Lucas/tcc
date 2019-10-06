@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h5>Apaga registro</h5>
+<form method="post">{% csrf_token %}
+    <p>Tem certeza que quer apagar o registro "{{ object }}"?</p>
+    <input type="submit" value="Confirma" class="btn btn-danger btn-block">
+</form>
+    <a href="{{ object.get_absolute_url }}" class="btn btn-success btn-block">Voltar</a>
+{% endblock %}
